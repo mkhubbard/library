@@ -1,0 +1,18 @@
+{% extends "LibraryAppBundle::base.html.twig" %}
+{% block body %}
+    {% if error %}
+        <div>{{ error.message|trans }}</div>
+    {% endif %}
+
+    <form action="{{ path('login_check') }}" method="post">
+        <label for="username">{% trans %}username{% endtrans %}</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">{% trans %}password{% endtrans %}</label>
+        <input type="password" id="password" name="_password" />
+
+        <input type="hidden" name="_target_path" value="/{{ app.request.locale }}" />
+
+        <button type="submit" name="login">login</button>
+    </form>
+{% endblock %}
