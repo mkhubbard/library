@@ -1,7 +1,5 @@
 <?php
 /**
- * @todo Implement serializable interface.
- * @todo Implement erase method.
  * @todo Validate object input.
  */
 namespace Library\Bundle\AppBundle\Entity;
@@ -9,9 +7,10 @@ namespace Library\Bundle\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 //use Doctrine\ORM\Mapping\OneToMany;
-use Doctrine\Common\Collections\ArrayCollection;
+//use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User Class
@@ -19,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Library\Bundle\AppBundle\Entity\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
 
     /**
@@ -80,7 +79,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get d
+     * Get id
      *
      * @return integer
      */
@@ -107,7 +106,8 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getSalt()
     {
-        // The bcrypt encoder
+        // The bcrypt encoder requires null to be returned as it will
+        // generate the salt automatically.
         return null;
     }
 
@@ -249,8 +249,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->username,
-            $this->password
+            $this->username
         ));
     }
 
@@ -261,9 +260,19 @@ class User implements AdvancedUserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->username,
-            $this->password
+            $this->username
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEqualTo(UserInterface $user)
+    {
+        $result = ($user->getId() == $this->id);
+        $result = $result && ($user->getUsername() == $this->username);
+
+        return $result;
     }
 
 }
