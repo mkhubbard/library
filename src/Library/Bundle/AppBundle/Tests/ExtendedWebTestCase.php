@@ -18,7 +18,6 @@ class ExtendedWebTestCase extends WebTestCase
     {
         $this->client = static::createClient();
 
-        /*
         $container = $this->client->getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
 
@@ -36,7 +35,6 @@ class ExtendedWebTestCase extends WebTestCase
         $purger = new \Doctrine\Common\DataFixtures\Purger\ORMPurger($em);
         $executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($em, $purger);
         $executor->execute($loader->getFixtures());
-        */
     }
 
     public function tearDown()
@@ -47,7 +45,6 @@ class ExtendedWebTestCase extends WebTestCase
 
     protected function runConsole($command, Array $options = array())
     {
-        /*
         $kernel = $this->container->get('kernel');
 
         $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
@@ -62,7 +59,6 @@ class ExtendedWebTestCase extends WebTestCase
         unset($application);
 
         return $result;
-        */
     }
 
 }

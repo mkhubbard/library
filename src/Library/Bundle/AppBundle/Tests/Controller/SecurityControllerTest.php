@@ -30,18 +30,15 @@ class SecurityControllerTest extends ExtendedWebTestCase
 
     public function testEmailLogin()
     {
-        /*
-        $crawler = $this->client->request('get', '/login')->selectButton('login');
+        $crawler = $this->client->request('get', '/en/login')->selectButton('login');
         $form = $crawler->form();
 
         $form['_username'] = 'administrator@example.com';
         $form['_password'] = 'default';
         $this->client->submit($form);
 
-        $security = $this->client->getProfile()->getCollector('security');
-
-        $this->assertTrue(is_string($security->getUser()) && strlen($security->getUser()) > 0);
-        $this->assertTrue($security->isAuthenticated(), 'Logged in user is not authenticated.');
-        */
+        /** @var SecurityContext $security */
+        $security = self::$kernel->getContainer()->get('security.context');
+        $this->assertTrue(($security->getToken() !== null) && $security->getToken()->isAuthenticated(), 'Logged in user is not authenticated.');
     }
 }
