@@ -2,10 +2,36 @@
 <html>
 <head>
     <title>{% block title %}The Library{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% stylesheets
+        '@LibraryAppBundle/Resources/public/bootstrap/less/bootstrap.less'
+        filter='lessphp'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
 </head>
 
 <body>
-{% block body %}{% endblock %}
+
+    {% block body %}{% endblock %}
+
+    {% javascripts
+        '@LibraryAppBundle/Resources/public/jquery/jquery-1.11.1.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/transition.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/modal.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/dropdown.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/scrollspy.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/tab.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/tooltip.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/popover.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/alert.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/button.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/collapse.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/carousel.js'
+        '@LibraryAppBundle/Resources/public/bootstrap/js/affix.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 </body>
 
 </html>
