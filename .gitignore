@@ -1,3 +1,4 @@
+# Symfony Framework
 /web/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
@@ -9,4 +10,10 @@
 /vendor/
 /bin/
 /composer.phar
+
+# PhpStorm
 .idea
+
+# Application
+/src/Library/Bundle/AppBundle/Resources/public/bootstrap
+/src/Library/Bundle/AppBundle/Resources/public/jquery

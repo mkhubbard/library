@@ -4,7 +4,7 @@
     <title>{% block title %}The Library{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% stylesheets
-        '@LibraryAppBundle/Resources/public/bootstrap/less/bootstrap.less'
+        '@LibraryAppBundle/Resources/public/css/library.less'
         filter='lessphp'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
@@ -12,8 +12,19 @@
 </head>
 
 <body>
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">The Library</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <div class="content container">
     {% block body %}{% endblock %}
+    </div>
 
     {% javascripts
         '@LibraryAppBundle/Resources/public/jquery/jquery-1.11.1.js'
