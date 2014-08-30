@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>type_not_valid</source>
+                <target>The value {{ value }} is not a valid {{ type }}.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>username_min_length</source>
+                <target>Your username must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>username_max_length</source>
+                <target>Your username cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>password_min_length</source>
+                <target>Your password must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>password_max_length</source>
+                <target>Your password cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>email_max_length</source>
+                <target>Your email cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>role_max_length</source>
+                <target>Role name cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>email_not_valid</source>
+                <target>The entered email address '{{ value }}' is not valid.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>email_already_used</source>
+                <target>The email address provided is already registered to another account.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
