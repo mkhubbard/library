@@ -51,6 +51,9 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $encoder = $this->container->get('security.encoder_factory')->getEncoder($entity);
+            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -193,6 +196,9 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $encoder = $this->container->get('security.encoder_factory')->getEncoder($entity);
+            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
