@@ -1,7 +1,5 @@
 <?php
-/**
- * @todo Validate object input.
- */
+
 namespace Library\Bundle\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,8 +7,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-//use Doctrine\ORM\Mapping\OneToMany;
-//use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User Class
@@ -64,18 +60,12 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $isActive;
 
     /**
-     * @OneToMany(targetEntity="UserBook", mappedBy="user")
-     */
-    //private $books;
-
-    /**
      * Class Constructor
      */
     public function __construct()
     {
         $this->isActive = true;
         $this->role = 'ROLE_USER';
-        //$this->books = new ArrayCollection();
     }
 
     /**
