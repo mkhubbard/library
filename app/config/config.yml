@@ -37,6 +37,9 @@ sensio_framework_extra:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'LibraryAppBundle:Form:form_div_layout.html.twig'
 
 # Assetic Configuration
 assetic:

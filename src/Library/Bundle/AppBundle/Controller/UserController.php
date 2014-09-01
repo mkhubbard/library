@@ -81,7 +81,7 @@ class UserController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -170,7 +170,7 @@ class UserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Update', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -191,13 +191,20 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
+        $currentPassword = $entity->getPassword();
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $encoder = $this->container->get('security.encoder_factory')->getEncoder($entity);
-            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+            $formPassword = $entity->getPassword();
+            if (!empty($formPassword)) {
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($entity);
+                $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+            } else {
+                $entity->setPassword($currentPassword);
+            }
 
             $em->flush();
 
@@ -248,7 +255,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Delete', 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }
