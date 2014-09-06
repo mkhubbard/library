@@ -17,6 +17,28 @@
                     "type": "file"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "underscore/underscore",
+                "version": "1.7.0",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/jashkenas/underscore/1.7.0/underscore.js",
+                    "type": "file"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "backbone/backbone",
+                "version": "1.1.2",
+                "dist": {
+                    "url": "https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js",
+                    "type": "file"
+                }
+            }
         }
     ],
     "require": {
@@ -36,7 +58,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "oyejorge/less.php": "~1.5",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.11.*"
+        "jquery/jquery":  "1.11.*",
+        "underscore/underscore":  "1.7.*",
+        "backbone/backbone":  "1.1.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

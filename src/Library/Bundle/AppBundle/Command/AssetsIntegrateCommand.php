@@ -59,7 +59,9 @@ EOM
                     return $result;
                 }
             ],
-            'jquery/jquery'  => [ 'target' => 'jquery' ]
+            'jquery/jquery'  => [ 'target' => 'jquery' ],
+            'underscore/underscore'  => [ 'target' => 'underscore' ],
+            'backbone/backbone'  => [ 'target' => 'backbone' ]
         ];
 
         $filesystem = $this->getContainer()->get('filesystem');
