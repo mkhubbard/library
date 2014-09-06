@@ -1,7 +1,5 @@
 <?php
-/**
- * @todo Validate object input.
- */
+
 namespace Library\Bundle\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,14 +7,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-//use Doctrine\ORM\Mapping\OneToMany;
-//use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User Class
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Library\Bundle\AppBundle\Entity\UserRepository")
+ * @UniqueEntity(
+ *      fields = "email",
+ *      message = "email_already_used"
+ * )
  */
 class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
@@ -32,21 +33,40 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     /**
      * @var string User account name.
      * @ORM\Column(name="username", type="string", length=30, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "username_min_length",
+     *      maxMessage = "username_max_length"
+     * )
      */
     private $username;
 
     /**
      * @var string Account password.
      * @ORM\Column(name="password", type="string", length=60)
+     * @Assert\NotBlank(groups={"password"})
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 30,
+     *      minMessage = "password_min_length",
+     *      maxMessage = "password_max_length",
+     * )
      */
     private $password;
 
     /**
      * @var string Account email address
-     * @ORM\Column(name="email", type="string", length=80)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\NotBlank(groups={"password"})
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "email_max_length",
+     * )
      * @Assert\Email(
-     *      message = "The entered email address '{{ value }}' is not valid.",
-     *      checkMX = false
+     *      message = "email_not_valid",
+     *      checkMX = false,
      * )
      */
     private $email;
@@ -54,19 +74,20 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     /**
      * @var string Symfony security role.
      * @ORM\Column(name="role", type="string", length=15)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 15,
+     *      maxMessage = "role_max_length"
+     * )
      */
     private $role;
 
     /**
      * @var boolean Tells if the account is active.
      * @ORM\Column(name="is_active", type="boolean")
+     * @Assert\Type(type="bool", message="type_not_valid")
      */
     private $isActive;
-
-    /**
-     * @OneToMany(targetEntity="UserBook", mappedBy="user")
-     */
-    //private $books;
 
     /**
      * Class Constructor
@@ -75,7 +96,6 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     {
         $this->isActive = true;
         $this->role = 'ROLE_USER';
-        //$this->books = new ArrayCollection();
     }
 
     /**
@@ -126,7 +146,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
 
     /**
-     * Set email address for account.
+     * Set the email address for account.
      *
      * @param string $email
      */
@@ -261,7 +281,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         list (
             $this->id,
             $this->username
-        ) = unserialize($serialized);
+            ) = unserialize($serialized);
     }
 
     /**

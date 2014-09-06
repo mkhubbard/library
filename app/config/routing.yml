@@ -7,6 +7,7 @@ logout:
 library_app_default:
     pattern:  /
     defaults: { _controller: LibraryAppBundle:Default:index, _locale: en }
+    methods:  [GET]
 
 library_app:
     resource: "@LibraryAppBundle/Controller/"

@@ -24,6 +24,11 @@ framework:
     profiler:
         collect: false
 
+security:
+    firewalls:
+        default:
+            http_basic: ~
+
 web_profiler:
     toolbar: false
     intercept_redirects: false

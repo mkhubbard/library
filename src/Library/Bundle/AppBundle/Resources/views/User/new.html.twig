@@ -1,11 +1,23 @@
 {% extends "LibraryAppBundle::base.html.twig" %}
 
 {% block body -%}
-    <h1>User creation</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>New User</h2>
+        </div>
+    </div>
 
-    {{ form(form) }}
+    <div class="panel">
+        <div class="panel-body">
+            {%  form_theme form "LibraryAppBundle:Form:form_div_horizontal_layout.html.twig" %}
+            {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
+            {{- form_widget(form) -}}
+            {{ form_end(form) }}
 
-        <ul class="record_actions">
+        </div>
+    </div>
+
+    <ul class="record_actions">
     <li>
         <a href="{{ path('user') }}">
             Back to the list

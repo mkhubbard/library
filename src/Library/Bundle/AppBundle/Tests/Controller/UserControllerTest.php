@@ -19,15 +19,16 @@ class UserControllerTest extends WebTestCase
         ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /user/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->click($crawler->selectLink('Create a new user')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
             'library_bundle_appbundle_user[username]' => 'Test',
-            'library_bundle_appbundle_user[password]' => 'Foo',
+            'library_bundle_appbundle_user[password][first]' => 'TestPassword',
+            'library_bundle_appbundle_user[password][second]' => 'TestPassword',
             'library_bundle_appbundle_user[email]' => 'foo@example.com',
             'library_bundle_appbundle_user[role]' => 'ROLE_USER',
-            'library_bundle_appbundle_user[isActive]' => true
+            'library_bundle_appbundle_user[active]' => true
         ));
 
         $client->submit($form);
@@ -41,10 +42,11 @@ class UserControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Update')->form(array(
             'library_bundle_appbundle_user[username]' => 'Foo',
-            'library_bundle_appbundle_user[password]' => 'Foo',
+            'library_bundle_appbundle_user[password][first]' => 'FooPassword',
+            'library_bundle_appbundle_user[password][second]' => 'FooPassword',
             'library_bundle_appbundle_user[email]' => 'foo@example.com',
             'library_bundle_appbundle_user[role]' => 'ROLE_USER',
-            'library_bundle_appbundle_user[isActive]' => true
+            'library_bundle_appbundle_user[active]' => true
         ));
 
         $client->submit($form);
