@@ -10,7 +10,9 @@
     <div class="container">
         <div class="col-md-8">
             {%  form_theme edit_form "LibraryAppBundle:Form:form_div_horizontal_layout.html.twig" %}
-            {{ form_start(edit_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
+            {{ form_start(edit_form, {'attr': {'autocomplete':'off', 'role': 'form', 'novalidate': 'novalidate'}}) }}
+            <input style="display: none;" name="" type="text">
+            <input style="display: none;" name="" type="password">
             {{- form_widget(edit_form) -}}
             {{ form_end(edit_form) }}
         </div>

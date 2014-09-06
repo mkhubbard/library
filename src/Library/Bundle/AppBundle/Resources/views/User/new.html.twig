@@ -11,6 +11,8 @@
         <div class="panel-body">
             {%  form_theme form "LibraryAppBundle:Form:form_div_horizontal_layout.html.twig" %}
             {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
+            <input style="display: none;" name="" type="text">
+            <input style="display: none;" name="" type="password">
             {{- form_widget(form) -}}
             {{ form_end(form) }}
 
