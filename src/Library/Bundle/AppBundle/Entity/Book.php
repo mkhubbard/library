@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Book
 {
     /**
-     * @var integer Book primary ID.
+     * @var integer Book primary id.
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,7 +26,7 @@ class Book
     /**
      * @OneToMany(targetEntity="AuthorBook", mappedBy="book")
      */
-    //private $authors;
+    private $authors;
 
     /**
      * @var string Book title.
@@ -175,5 +175,4 @@ class Book
     {
         return $this->isbnDbPublisherId;
     }
-
 }

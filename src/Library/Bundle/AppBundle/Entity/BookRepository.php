@@ -1,5 +1,5 @@
 <?php
-namespace BinaryGrove\AppBundle\Entity;
+namespace Library\Bundle\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -54,5 +54,4 @@ class BookRepository extends EntityRepository
         return $paginator;
     }
     */
-
 }

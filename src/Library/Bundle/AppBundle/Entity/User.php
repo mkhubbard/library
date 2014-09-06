@@ -23,7 +23,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
 
     /**
-     * @var integer User account primary ID.
+     * @var integer User account primary id.
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -294,5 +294,4 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
         return $result;
     }
-
 }

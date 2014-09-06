@@ -9,10 +9,17 @@ class BookTest extends \PHPUnit_Framework_TestCase
     public function testNotNull()
     {
         $book = new Book();
+        $this->assertNotNull($book->getAuthors());
         $this->assertNotNull($book->getPublisherText());
         $this->assertNotNull($book->getLccNumber());
         $this->assertNotNull($book->getIsbnDbBookId());
         $this->assertNotNull($book->getIsbnDbPublisherId());
+    }
+
+    public function testAuthors()
+    {
+        $book = new Book();
+        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $book->getAuthors());
     }
 
     public function testTitle()
@@ -69,5 +76,4 @@ class BookTest extends \PHPUnit_Framework_TestCase
         $book->setIsbnDbPublisherId(" TestIsbnDbPublisherId ");
         $this->assertEquals("TestIsbnDbPublisherId", $book->getIsbnDbPublisherId());
     }
-
 }
