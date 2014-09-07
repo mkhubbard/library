@@ -17,3 +17,5 @@
 # Application
 /src/Library/Bundle/AppBundle/Resources/public/bootstrap
 /src/Library/Bundle/AppBundle/Resources/public/jquery
+/src/Library/Bundle/AppBundle/Resources/public/underscore
+/src/Library/Bundle/AppBundle/Resources/public/backbone
