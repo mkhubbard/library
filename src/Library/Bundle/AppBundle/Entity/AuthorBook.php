@@ -26,14 +26,14 @@ class AuthorBook
 
     /**
      * @var integer Author primary id.
-     * @ManyToOne(targetEntity="Author", inversedBy="author_book")
+     * @ManyToOne(targetEntity="Author", inversedBy="books")
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
     /**
      * @var integer Book primary id.
-     * @ManyToOne(targetEntity="Book", inversedBy="author_book")
+     * @ManyToOne(targetEntity="Book", inversedBy="authors")
      * @JoinColumn(name="book_id", referencedColumnName="id")
      */
     private $book;
@@ -97,4 +97,5 @@ class AuthorBook
     {
         return $this->role;
     }
+
 }
