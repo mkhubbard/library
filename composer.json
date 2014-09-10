@@ -35,7 +35,7 @@
                 "name": "backbone/backbone",
                 "version": "1.1.2",
                 "dist": {
-                    "url": "https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js",
+                    "url": "https://raw.githubusercontent.com/jashkenas/backbone/1.1.2/backbone.js",
                     "type": "file"
                 }
             }
@@ -76,7 +76,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Library\\Bundle\\AppBundle\\Composer\\ScriptHandler::installAssets"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -84,7 +85,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Library\\Bundle\\AppBundle\\Composer\\ScriptHandler::installAssets"
         ]
     },
     "config": {
