@@ -1,4 +1,6 @@
 {% extends "LibraryAppBundle::base.html.twig" %}
 {% block body %}
-Hello {{ name }}!
+    <a href="{{ path('book_index') }}" class="btn btn-primary" role="button">
+        Add Book
+    </a>
 {% endblock %}

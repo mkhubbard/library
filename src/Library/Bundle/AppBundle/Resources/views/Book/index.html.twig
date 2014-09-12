@@ -1,0 +1,17 @@
+{% extends "LibraryAppBundle::base.html.twig" %}
+
+{% block title %}LibraryAppBundle:Book:index{% endblock %}
+
+{% block body %}
+<h1>Add Book</h1>
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {%  form_theme lookup_form "LibraryAppBundle:Form:form_div_horizontal_layout.html.twig" %}
+    {{ form_start(lookup_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
+    {{- form_widget(lookup_form) -}}
+    {{ form_end(lookup_form) }}
+{% endblock %}
