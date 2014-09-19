@@ -4,6 +4,7 @@ namespace Library\Bundle\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Library\Bundle\AppBundle\Util\Canonicalizer;
 
 /**
  * User Class
@@ -29,6 +30,13 @@ class Author
     private $name;
 
     /**
+     * @var string Canonicalized author name
+     * @ORM\Column(name="name_canonical", type="string", length=64)
+     *
+     */
+    private $nameCanonical;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="AuthorBook", mappedBy="author")
      */
@@ -40,6 +48,7 @@ class Author
     public function __construct()
     {
         $this->name = '';
+        $this->nameCanonical = '';
         $this->books = new ArrayCollection();
     }
 
@@ -64,7 +73,16 @@ class Author
      */
     public function setName($name)
     {
-        $this->name = trim($name);
+        $this->name = $name;
+        $this->nameCanonical = Canonicalizer::canonicalize($this->getName());
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameCanonical()
+    {
+        return $this->nameCanonical;
     }
 
     /**

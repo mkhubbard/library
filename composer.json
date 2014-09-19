@@ -60,7 +60,8 @@
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.11.*",
         "underscore/underscore":  "1.7.*",
-        "backbone/backbone":  "1.1.*"
+        "backbone/backbone":  "1.1.*",
+        "google/apiclient": "1.0.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -72,6 +72,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'library_bundle_appbundle_user';
+        return 'library_appbundle_user';
     }
 }

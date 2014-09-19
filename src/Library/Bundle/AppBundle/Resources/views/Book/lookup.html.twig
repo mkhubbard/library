@@ -1,0 +1,39 @@
+{% extends "LibraryAppBundle::base.html.twig" %}
+
+{% block title %}LibraryAppBundle:Book:index{% endblock %}
+
+{% block body %}
+    <h1>Add Book</h1>
+
+    {% if 0 == results.totalItems %}
+        <h2>No books. Sad panda.</h2>
+    {% else %}
+        <table class="table table-bordered">
+            <tbody>
+            {% for item in results.items %}
+                <tr>
+                    <td>
+
+                        {%  if true == item.volumeInfo.offsetExists('imageLinks') %}
+                            <img src="{{ item.volumeInfo.imageLinks.smallThumbnail|replace({'&edge=curl': ''}) }}" />
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ item.volumeInfo.title }}
+                    </td>
+                    <td>{{ item.volumeInfo.authors|join(', ') }}</td>
+                    <td>
+                        <form>
+                            <input type="hidden" value="{{ item.volumeInfo|json_encode() }}" />
+                            <input type="submit" value="This is it!" />
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

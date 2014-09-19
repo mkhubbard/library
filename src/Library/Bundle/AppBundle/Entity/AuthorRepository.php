@@ -31,4 +31,29 @@ class AuthorRepository extends EntityRepository
 
         return $author;
     }
+
+    /**
+     * Load Author by Canonical Name
+     *
+     * @param $authorId
+     * @throws \Exception
+     * @internal param int $id
+     * @return mixed|\Library\Bundle\AppBundle\Entity\Author
+     */
+    public function loadByNameCanonical($name)
+    {
+        $query = $this->createQueryBuilder('a')
+                ->where('a.nameCanonical = :name')
+                ->setParameter('name', $name)
+                ->getQuery()
+        ;
+
+        try {
+            $author = $query->getSingleResult();
+        } catch (NoResultException $e) {
+            $author = null;
+        }
+
+        return $author;
+    }
 }

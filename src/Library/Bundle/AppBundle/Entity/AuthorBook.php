@@ -26,7 +26,7 @@ class AuthorBook
 
     /**
      * @var integer Author primary id.
-     * @ManyToOne(targetEntity="Author", inversedBy="books")
+     * @ManyToOne(targetEntity="Author", inversedBy="books", cascade={"persist"})
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;

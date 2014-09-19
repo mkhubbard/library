@@ -6,14 +6,18 @@ use Library\Bundle\AppBundle\Entity\Book;
 
 class BookTest extends \PHPUnit_Framework_TestCase
 {
-    public function testNotNull()
+    public function testNull()
     {
         $book = new Book();
+
+        $this->assertNull($book->getId());
+
         $this->assertNotNull($book->getAuthors());
-        $this->assertNotNull($book->getPublisherText());
+        $this->assertNotNull($book->getTitle());
+        $this->assertNotNull($book->getDescription());
+        $this->assertNotNull($book->getIsbn10());
+        $this->assertNotNull($book->getIsbn13());
         $this->assertNotNull($book->getLccNumber());
-        $this->assertNotNull($book->getIsbnDbBookId());
-        $this->assertNotNull($book->getIsbnDbPublisherId());
     }
 
     public function testAuthors()
@@ -28,52 +32,52 @@ class BookTest extends \PHPUnit_Framework_TestCase
 
         $book->setTitle("TestTitle");
         $this->assertEquals("TestTitle", $book->getTitle());
+        $this->assertEquals("testtitle", $book->getTitleCanonical());
 
-        $book->setTitle(" TestTitle ");
-        $this->assertEquals("TestTitle", $book->getTitle());
+        $book->setTitle(" TestTitle With Translations ");
+        $this->assertEquals("testtitle_with_translations", $book->getTitleCanonical());
     }
 
-    public function testPublisherTest()
+    public function testTitleCanonical()
     {
         $book = new Book();
 
-        $book->setPublisherText("TestPublisherText");
-        $this->assertEquals("TestPublisherText", $book->getPublisherText());
+        $book->setTitle(" TestTitle ");
+        $this->assertEquals("testtitle", $book->getTitleCanonical());
 
-        $book->setPublisherText(" TestPublisherText ");
-        $this->assertEquals("TestPublisherText", $book->getPublisherText());
+        $book->setTitle("TestTitle With Translations ~!@#$");
+        $this->assertEquals("testtitle_with_translations______", $book->getTitleCanonical());
+    }
+
+    public function testDescription()
+    {
+        $book = new Book();
+
+        $book->setTitle("TestDescription");
+        $this->assertEquals("TestDescription", $book->getTitle());
+    }
+
+    public function testIsbn10()
+    {
+        $book = new Book();
+
+        $book->setIsbn10("TestIsbn10");
+        $this->assertEquals("TestIsbn10", $book->getIsbn10());
+    }
+    
+    public function testIsbn13()
+    {
+        $book = new Book();
+
+        $book->setIsbn13("TestIsbn13");
+        $this->assertEquals("TestIsbn13", $book->getIsbn13());
     }    
     
-    public function testLccNumberTest()
+    public function testLccNumber()
     {
         $book = new Book();
 
         $book->setLccNumber("TestLccNumber");
         $this->assertEquals("TestLccNumber", $book->getLccNumber());
-
-        $book->setLccNumber(" TestLccNumber ");
-        $this->assertEquals("TestLccNumber", $book->getLccNumber());
-    }    
-    
-    public function testIsbnDbBookIdTest()
-    {
-        $book = new Book();
-
-        $book->setIsbnDbBookId("TestIsbnDbBookId");
-        $this->assertEquals("TestIsbnDbBookId", $book->getIsbnDbBookId());
-
-        $book->setIsbnDbBookId(" TestIsbnDbBookId ");
-        $this->assertEquals("TestIsbnDbBookId", $book->getIsbnDbBookId());
-    }   
-    
-    public function testIsbnDbPublisherIdTest()
-    {
-        $book = new Book();
-
-        $book->setIsbnDbPublisherId("TestIsbnDbPublisherId");
-        $this->assertEquals("TestIsbnDbPublisherId", $book->getIsbnDbPublisherId());
-
-        $book->setIsbnDbPublisherId(" TestIsbnDbPublisherId ");
-        $this->assertEquals("TestIsbnDbPublisherId", $book->getIsbnDbPublisherId());
     }
 }

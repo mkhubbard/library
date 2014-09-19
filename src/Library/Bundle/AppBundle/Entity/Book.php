@@ -5,6 +5,7 @@ namespace Library\Bundle\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
+use Library\Bundle\AppBundle\Util\Canonicalizer;
 
 /**
  * User Class
@@ -22,12 +23,6 @@ class Book
      */
     private $id;
 
-
-    /**
-     * @OneToMany(targetEntity="AuthorBook", mappedBy="book")
-     */
-    private $authors;
-
     /**
      * @var string Book title.
      * @ORM\Column(name="title", type="string", length=128)
@@ -35,11 +30,28 @@ class Book
     private $title;
 
     /**
-     * @var string Publisher description text.
-     * @ORM\Column(name="publisher_text", type="string", length=128)
+     * @var string Canonicalized version of the book title.
+     * @ORM\Column(name="title_canonical", type="string", length=128)
      */
-    private $publisherText;
+    private $titleCanonical;
 
+    /**
+     * @var string Book description text.
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string Book title.
+     * @ORM\Column(name="isbn10", type="string", length=13)
+     */
+    private $isbn10;
+
+    /**
+     * @var string Book title.
+     * @ORM\Column(name="isbn13", type="string", length=10)
+     */
+    private $isbn13;
 
     /**
      * @var string Library of Congress number.
@@ -48,26 +60,20 @@ class Book
     private $lccNumber;
 
     /**
-     * @var string ISBNDB.COM Book ID
-     * @ORM\Column(name="isbndb_book_id", type="string", length=64)
+     * @OneToMany(targetEntity="AuthorBook", mappedBy="book", cascade={"persist", "remove"})
      */
-    private $isbnDbBookId;
-
-    /**
-     * @var string ISBNDB.COM Publisher ID
-     * @ORM\Column(name="isbndb_publisher_id", type="string", length=64)
-     */
-    private $isbnDbPublisherId;
-
+    private $authors;
 
     public function __construct()
     {
-        $this->publisherText = '';
+        $this->id = null;
+        $this->title = '';
+        $this->titleCanonical = '';
+        $this->description = '';
+        $this->isbn10 = '';
+        $this->isbn13 = '';
         $this->lccNumber = '';
-        $this->isbnDbBookId = '';
-        $this->isbnDbPublisherId = '';
         $this->authors = new ArrayCollection();
-        $this->owners = new ArrayCollection();
     }
 
     /**
@@ -89,22 +95,6 @@ class Book
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getOwners()
-    {
-        return $this->getOwners();
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = trim($title);
-    }
-
-    /**
      * @return string
      */
     public function getTitle()
@@ -113,27 +103,68 @@ class Book
     }
 
     /**
-     * @param string $publisherText
+     * @param string $title
      */
-    public function setPublisherText($publisherText)
+    public function setTitle($title)
     {
-        $this->publisherText = trim($publisherText);
+        $this->title = $title;
+        $this->titleCanonical = Canonicalizer::canonicalize($this->getTitle());
     }
 
     /**
      * @return string
      */
-    public function getPublisherText()
+    public function getTitleCanonical()
     {
-        return $this->publisherText;
+        return $this->titleCanonical;
     }
 
     /**
-     * @param string $lccNumber
+     * @return string
      */
-    public function setLccNumber($lccNumber)
+    public function getDescription()
     {
-        $this->lccNumber = trim($lccNumber);
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIsbn10()
+    {
+        return $this->isbn10;
+    }
+
+    /**
+     * @param string $isbn10
+     */
+    public function setIsbn10($isbn10)
+    {
+        $this->isbn10 = $isbn10;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIsbn13()
+    {
+        return $this->isbn13;
+    }
+
+    /**
+     * @param string $isbn13
+     */
+    public function setIsbn13($isbn13)
+    {
+        $this->isbn13 = $isbn13;
     }
 
     /**
@@ -145,34 +176,28 @@ class Book
     }
 
     /**
-     * @param string $isbnDbBookId
+     * @param string $lccNumber
      */
-    public function setIsbnDbBookId($isbnDbBookId)
+    public function setLccNumber($lccNumber)
     {
-        $this->isbnDbBookId = trim($isbnDbBookId);
+        $this->lccNumber = $lccNumber;
     }
 
     /**
-     * @return string
+     * @param AuthorBook $author
      */
-    public function getIsbnDbBookId()
+    public function addAuthor(AuthorBook $author)
     {
-        return $this->isbnDbBookId;
+        $author->setBook($this);
+        $this->authors->add($author);
     }
 
     /**
-     * @param string $isbnDbPublisherId
+     * @param AuthorBook $author
      */
-    public function setIsbnDbPublisherId($isbnDbPublisherId)
+    public function removeAuthor(AuthorBook $author)
     {
-        $this->isbnDbPublisherId = trim($isbnDbPublisherId);
-    }
-
-    /**
-     * @return string
-     */
-    public function getIsbnDbPublisherId()
-    {
-        return $this->isbnDbPublisherId;
+        $author->setBook(null);
+        $this->authors->removeElement($author);
     }
 }

@@ -12,6 +12,14 @@
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
         </testsuite>
+        <testsuite name="Entities">
+            <directory>../src/*/*Bundle/Tests/Entity</directory>
+            <directory>../src/*/Bundle/*Bundle/Tests/Entity</directory>
+        </testsuite>
+        <testsuite name="Util">
+            <directory>../src/*/*Bundle/Tests/Util</directory>
+            <directory>../src/*/Bundle/*Bundle/Tests/Util</directory>
+        </testsuite>
     </testsuites>
 
     <!--

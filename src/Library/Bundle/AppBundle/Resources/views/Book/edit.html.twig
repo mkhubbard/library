@@ -16,16 +16,16 @@
     <ul class="authors" data-prototype="{{ form_widget(form.authors.vars.prototype)|e }}">
         {# iterate over each existing tag and render its only field: name #}
         {% for author in form.authors %}
-            <li>{{ form_row(author.role) }}</li>
+            <li>{{ form_row(author.author.name) }}</li>
         {% endfor %}
     </ul>
     {{ form_end(form) }}
 {% endblock %}
 
 {% block pagescripts %}
-{% javascripts
+    {% javascripts
     '@LibraryAppBundle/Resources/public/library/book/new.js'
     %}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
