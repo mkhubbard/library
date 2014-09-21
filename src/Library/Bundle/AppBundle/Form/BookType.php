@@ -41,14 +41,16 @@ class BookType extends AbstractType
             'allow_add'     => true,
             'allow_delete'  => true,
             'delete_empty'  => true,
-            'by_reference'  => false
+            'by_reference'  => false,
+            'cascade_validation' => true
         ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Library\Bundle\AppBundle\Entity\Book',
+            'data_class'         => 'Library\Bundle\AppBundle\Entity\Book',
+            'cascade_validation' => true
         ));
     }
 

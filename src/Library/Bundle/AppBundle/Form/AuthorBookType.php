@@ -17,7 +17,8 @@ class AuthorBookType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Library\Bundle\AppBundle\Entity\AuthorBook',
+            'data_class'         => 'Library\Bundle\AppBundle\Entity\AuthorBook',
+            'cascade_validation' => true
         ));
     }
 

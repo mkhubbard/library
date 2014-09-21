@@ -5,6 +5,8 @@
 {% block body %}
     <h1>New Book</h1>
 
+    {{ form_errors(form) }}
+
     {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
     {# render the task's only field: description #}
     {{ form_row(form.title) }}
@@ -16,7 +18,7 @@
     <ul class="authors" data-prototype="{{ form_widget(form.authors.vars.prototype)|e }}">
         {# iterate over each existing tag and render its only field: name #}
         {% for author in form.authors %}
-            <li>{{ form_row(author.role) }}</li>
+            <li>{{ form_row(author.author.name) }}</li>
         {% endfor %}
     </ul>
     {{ form_end(form) }}

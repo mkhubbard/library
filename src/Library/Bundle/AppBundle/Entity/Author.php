@@ -5,6 +5,7 @@ namespace Library\Bundle\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Library\Bundle\AppBundle\Util\Canonicalizer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User Class
@@ -25,13 +26,18 @@ class Author
     /**
      * @var string Author name
      * @ORM\Column(name="name", type="string", length=64)
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 64,
+     *      maxMessage = "author_name_max_length"
+     * )
      */
     private $name;
 
     /**
      * @var string Canonicalized author name
-     * @ORM\Column(name="name_canonical", type="string", length=64)
+     * @ORM\Column(name="name_canonical", type="string", length=64, unique=true)
      *
      */
     private $nameCanonical;

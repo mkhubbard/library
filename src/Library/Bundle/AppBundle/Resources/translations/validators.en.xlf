@@ -38,6 +38,30 @@
                 <source>email_already_used</source>
                 <target>The email address provided is already registered to another account.</target>
             </trans-unit>
+            <trans-unit id="10">
+                <source>author_name_max_length</source>
+                <target>Author name cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>book_title_max_length</source>
+                <target>Book title cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>isbn10_message</source>
+                <target>This value is not a valid ISBN-10</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>isbn13_message</source>
+                <target>This value is not a valid ISBN-13</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>lcc_max_length</source>
+                <target>LCC number cannot be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>author_min_count</source>
+                <target>You must specify at least one author.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

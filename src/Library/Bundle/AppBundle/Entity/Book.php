@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Library\Bundle\AppBundle\Util\Canonicalizer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User Class
@@ -26,6 +27,11 @@ class Book
     /**
      * @var string Book title.
      * @ORM\Column(name="title", type="string", length=128)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 128,
+     *      maxMessage = "book_title_max_length"
+     * )
      */
     private $title;
 
@@ -43,24 +49,40 @@ class Book
 
     /**
      * @var string Book title.
-     * @ORM\Column(name="isbn10", type="string", length=13)
+     * @ORM\Column(name="isbn10", type="string", length=10)
+     * @Assert\Isbn(
+     *     type = "isbn10",
+     *     message = "isbn10_message"
+     * )
      */
     private $isbn10;
 
     /**
      * @var string Book title.
-     * @ORM\Column(name="isbn13", type="string", length=10)
+     * @ORM\Column(name="isbn13", type="string", length=13)
+     * @Assert\Isbn(
+     *     type = "isbn13",
+     *     message = "isbn13_message"
+     * )
      */
     private $isbn13;
 
     /**
      * @var string Library of Congress number.
      * @ORM\Column(name="lcc_number", type="string", length=24)
+     * @Assert\Length(
+     *      max = 24,
+     *      maxMessage = "lcc_max_length"
+     * )
      */
     private $lccNumber;
 
     /**
      * @OneToMany(targetEntity="AuthorBook", mappedBy="book", cascade={"persist", "remove"})
+     * @Assert\Count(
+     *      min = 1,
+     *      minMessage = "author_min_count"
+     * )
      */
     private $authors;
 
