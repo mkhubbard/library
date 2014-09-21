@@ -5,6 +5,8 @@
 {% block body %}
     <h1>New Book</h1>
 
+    {{ form(delete_form) }}
+
     {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate'}}) }}
     {# render the task's only field: description #}
     {{ form_row(form.title) }}

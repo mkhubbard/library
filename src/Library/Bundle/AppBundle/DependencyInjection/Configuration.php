@@ -18,11 +18,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('library_app');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode = $treeBuilder->root('library_app')
+            ->children()
+                ->scalarNode('google_api_key');
 
         return $treeBuilder;
     }

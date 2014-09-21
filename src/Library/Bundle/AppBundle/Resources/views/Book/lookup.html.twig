@@ -14,20 +14,20 @@
                 <tr>
                     <td>
 
-                        {%  if true == item.volumeInfo.offsetExists('imageLinks') %}
-                            <img src="{{ item.volumeInfo.imageLinks.smallThumbnail|replace({'&edge=curl': ''}) }}" />
-                        {% else %}
+                        {%  if 0 == item.imageLinks|length %}
                             No Image
+                        {% else %}
+                            <img src="{{ item.imageLinks.smallThumbnail|replace({'&edge=curl': ''}) }}" />
                         {% endif %}
                     </td>
                     <td>
-                        {{ item.volumeInfo.title }}
+                        {{ item.title }}
                     </td>
-                    <td>{{ item.volumeInfo.authors|join(', ') }}</td>
+                    <td>{{ item.authors|join(', ') }}</td>
                     <td>
-                        <form>
-                            <input type="hidden" value="{{ item.volumeInfo|json_encode() }}" />
-                            <input type="submit" value="This is it!" />
+                        <form method="post" action="{{ path('book_create') }}">
+                            <input type="hidden" name="book_data" value="{{ item|json_encode() }}" />
+                            <input type="submit" name="book_selected" value="This is it!" />
                         </form>
                     </td>
                 </tr>
